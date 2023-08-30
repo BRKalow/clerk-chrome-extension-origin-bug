@@ -3,6 +3,11 @@
   "description": "Test Chrome extensions with Clerk",
   "version": "0.1",
   "manifest_version": 3,
+  "permissions": [
+    "declarativeNetRequestWithHostAccess",
+    "declarativeNetRequest",
+    "declarativeNetRequestFeedback"
+  ],
   "action": {
     "default_popup": "index.html",
     "default_title": "Open the popup"
@@ -11,5 +16,21 @@
     "16": "logo192.png",
     "48": "logo192.png",
     "128": "logo192.png"
-  }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ],
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "modify-origin",
+        "enabled": true,
+        "path": "modify-origin.json"
+      }
+    ]
+  },
+  "host_permissions": ["<all_urls>"]
 }
